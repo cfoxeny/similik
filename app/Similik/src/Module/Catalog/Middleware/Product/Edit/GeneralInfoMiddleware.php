@@ -50,8 +50,7 @@ class GeneralInfoMiddleware extends MiddlewareAbstract
                 }
                 return $result;
             });
-
-//        // Loading data by using GraphQL
+        // Loading data by using GraphQL
         if($request->attributes->get('_matched_route') == 'product.edit')
             $this->getContainer()
                 ->get(GraphqlExecutor::class)
@@ -72,7 +71,7 @@ class GeneralInfoMiddleware extends MiddlewareAbstract
                             stock_availability
                         }
                     }"
-                ])->then(function($result) use (&$fields, $response) {
+                ])->then(function($result) use ($response) {
                     /**@var \GraphQL\Executor\ExecutionResult $result */
                     if(isset($result->data['general_info'])) {
                         $response->addWidget(
